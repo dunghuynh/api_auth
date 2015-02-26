@@ -26,6 +26,7 @@ module ApiAuth
       headers = Headers.new(request)
       headers.calculate_md5
       headers.set_date
+      headers.set_nonce
       headers.sign_header auth_header(request, access_id, secret_key)
     end
 

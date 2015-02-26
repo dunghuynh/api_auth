@@ -127,7 +127,8 @@ describe "ApiAuth" do
       before(:each) do
         headers = { 'Content-MD5' => "1B2M2Y8AsgTpgAmY7PhCfg==",
                     'Content-Type' => "text/plain",
-                    'Date' => Time.now.utc.httpdate }
+                    'Date' => Time.now.utc.httpdate,
+                    'NONCE' => "0599e5ed6cbb522053f4faf4eccfbd3a" }
         @request = RestClient::Request.new(:url => "/resource.xml?foo=bar&bar=foo",
           :headers => headers,
           :method => :put)
@@ -253,7 +254,9 @@ describe "ApiAuth" do
       before(:each) do
         headers = { 'Content-MD5' => "e59ff97941044f85df5297e1c302d260",
                     'Content-Type' => "text/plain",
-                    'Date' => Time.now.utc.httpdate }
+                    'Date' => Time.now.utc.httpdate,
+                    'NONCE' => "0599e5ed6cbb522053f4faf4eccfbd3a"
+        }
         @request = Curl::Easy.new("/resource.xml?foo=bar&bar=foo") do |curl|
           curl.headers = headers
         end
@@ -267,7 +270,8 @@ describe "ApiAuth" do
       describe "md5 header" do
         it "should not calculate and add the content-md5 header if not provided" do
           headers = { 'Content-Type' => "text/plain",
-                      'Date' => "Mon, 23 Jan 1984 03:29:56 GMT" }
+                      'Date' => "Mon, 23 Jan 1984 03:29:56 GMT",
+                      'NONCE' => "0599e5ed6cbb522053f4faf4eccfbd3a" }
           request = Curl::Easy.new("/resource.xml?foo=bar&bar=foo") do |curl|
             curl.headers = headers
           end

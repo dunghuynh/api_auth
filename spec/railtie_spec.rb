@@ -112,12 +112,14 @@ describe "Rails integration" do
     it "should send signed requests automagically" do
       timestamp = Time.parse("Mon, 23 Jan 1984 03:29:56 GMT")
       Time.should_receive(:now).at_least(1).times.and_return(timestamp)
+      SecureRandom.should_receive(:hex).at_least(1).times.and_return("20f0e6fcef31a0280a21be6d2147542d")
       ActiveResource::HttpMock.respond_to do |mock|
         mock.get "/test_resources/1.xml",
           {
-            'Authorization' => 'APIAuth 1044:IbTx7VzSOGU55HNbV4y2jZDnVis=',
+            'Authorization' => 'APIAuth 1044:KT20kaUZRC8AOum/uoE6eTXvbV8=',
             'Accept' => 'application/xml',
-            'DATE' => "Mon, 23 Jan 1984 03:29:56 GMT"
+            'DATE' => "Mon, 23 Jan 1984 03:29:56 GMT",
+            'NONCE' => "20f0e6fcef31a0280a21be6d2147542d"
           },
           { :id => "1" }.to_xml(:root => 'test_resource')
       end

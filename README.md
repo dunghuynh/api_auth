@@ -25,7 +25,7 @@ content-MD5 are not present, then a blank string is used in their place. If the
 timestamp isn't present, a valid HTTP date is automatically added to the
 request. The canonical string is computed as follows:
 
-    canonical_string = 'content-type,content-MD5,request URI,timestamp'
+    canonical_string = 'content-type,content-MD5,request URI,timestamp,nonce'
 
 2. This string is then used to create the signature which is a Base64 encoded
 SHA1 HMAC, using the client's private secret key.
@@ -89,7 +89,8 @@ A typical RestClient PUT request may look like:
 ``` ruby
     headers = { 'Content-MD5' => "e59ff97941044f85df5297e1c302d260",
         'Content-Type' => "text/plain",
-        'Date' => "Mon, 23 Jan 1984 03:29:56 GMT" }
+        'Date' => "Mon, 23 Jan 1984 03:29:56 GMT",
+        'NONCE' => SecureRandom.hex }
     @request = RestClient::Request.new(:url => "/resource.xml?foo=bar&bar=foo",
         :headers => headers,
         :method => :put)
