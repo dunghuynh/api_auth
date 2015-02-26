@@ -54,7 +54,8 @@ module ApiAuth
       [ @request.content_type,
         @request.content_md5,
         @request.request_uri.gsub(/https?:\/\/[^(,|\?|\/)]*/,''), # remove host
-        @request.timestamp
+        @request.timestamp,
+        @request.nonce
       ].join(",")
     end
 
@@ -65,6 +66,10 @@ module ApiAuth
 
     def set_date
       @request.set_date if @request.timestamp.empty?
+    end
+
+    def set_nonce
+      @request.set_nonce if @request.nonce.empty?
     end
 
     def calculate_md5

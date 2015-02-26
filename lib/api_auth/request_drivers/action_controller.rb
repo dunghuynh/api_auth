@@ -59,8 +59,17 @@ module ApiAuth
         @request.env['HTTP_DATE'] = Time.now.utc.httpdate
       end
 
+      def set_nonce
+        @request.env["NONCE"] = SecureRandom.hex
+      end
+
       def timestamp
         value = find_header(%w(DATE HTTP_DATE))
+        value.nil? ? "" : value
+      end
+
+      def nonce
+        value = find_header(%w(NONCE))
         value.nil? ? "" : value
       end
 
