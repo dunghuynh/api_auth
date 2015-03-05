@@ -79,7 +79,7 @@ module ApiAuth
       end
 
       def nonce
-        value = find_header(%w(NONCE))
+        value = find_header(%w(NONCE HTTP_NONCE))
         value.nil? ? "" : value
       end
 
