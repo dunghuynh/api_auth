@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "activeresource", "~> 3.0.0"
   s.add_development_dependency "rest-client", "~> 1.6.0"
   s.add_development_dependency "curb", "~> 0.8.1"
+  s.add_development_dependency "grape", "~> 0.9.0"
   s.add_development_dependency "httpi"
   s.add_development_dependency "faraday"
   s.add_development_dependency "multipart-post", "~> 2.0"
