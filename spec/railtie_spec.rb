@@ -119,7 +119,7 @@ describe "Rails integration" do
             'Authorization' => 'APIAuth 1044:KT20kaUZRC8AOum/uoE6eTXvbV8=',
             'Accept' => 'application/xml',
             'DATE' => "Mon, 23 Jan 1984 03:29:56 GMT",
-            'NONCE' => "20f0e6fcef31a0280a21be6d2147542d"
+            'X_NONCE' => "20f0e6fcef31a0280a21be6d2147542d"
           },
           { :id => "1" }.to_xml(:root => 'test_resource')
       end

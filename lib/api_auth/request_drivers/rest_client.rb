@@ -70,7 +70,7 @@ module ApiAuth
       end
 
       def set_nonce
-        @request.headers.merge!({ "NONCE" => SecureRandom.hex })
+        @request.headers.merge!({ "X_NONCE" => SecureRandom.hex })
       end
 
       def timestamp
@@ -79,7 +79,7 @@ module ApiAuth
       end
 
       def nonce
-        value = find_header(%w(NONCE HTTP_NONCE))
+        value = find_header(%w(X_NONCE HTTP_X_NONCE))
         value.nil? ? "" : value
       end
 

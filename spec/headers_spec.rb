@@ -30,7 +30,7 @@ describe "ApiAuth::Headers" do
         'content-type' => 'text/plain',
         'content-md5' => 'e59ff97941044f85df5297e1c302d260',
         'date' => "Mon, 23 Jan 1984 03:29:56 GMT",
-        'NONCE' => "20f0e6fcef31a0280a21be6d2147542d" )
+        'X_NONCE' => "20f0e6fcef31a0280a21be6d2147542d" )
       @headers = ApiAuth::Headers.new(@request)
     end
 
@@ -76,7 +76,7 @@ describe "ApiAuth::Headers" do
       headers = { 'Content-MD5' => "e59ff97941044f85df5297e1c302d260",
                   'Content-Type' => "text/plain",
                   'Date' => "Mon, 23 Jan 1984 03:29:56 GMT",
-                  'NONCE' => "20f0e6fcef31a0280a21be6d2147542d" }
+                  'X_NONCE' => "20f0e6fcef31a0280a21be6d2147542d" }
       @request = RestClient::Request.new(:url => "/resource.xml?foo=bar&bar=foo",
         :headers => headers,
         :method => :put)
@@ -113,7 +113,7 @@ describe "ApiAuth::Headers" do
       request.headers['DATE'].should be_nil
     end
 
-    it "should set the NONCE header if one is not already present" do
+    it "should set the X_NONCE header if one is not already present" do
       headers = { 'Content-MD5' => "e59ff97941044f85df5297e1c302d260",
                   'Content-Type' => "text/plain",
                   'Date' => "Mon, 23 Jan 1984 03:29:56 GMT"}
@@ -121,7 +121,7 @@ describe "ApiAuth::Headers" do
         :headers => headers,
         :method => :put)
       ApiAuth.sign!(@request, "some access id", "some secret key")
-      @request.headers['NONCE'].should_not be_nil
+      @request.headers['X_NONCE'].should_not be_nil
     end
 
 
@@ -144,7 +144,7 @@ describe "ApiAuth::Headers" do
       headers = { 'Content-MD5' => "e59ff97941044f85df5297e1c302d260",
                   'Content-Type' => "text/plain",
                   'Date' => "Mon, 23 Jan 1984 03:29:56 GMT",
-                  'NONCE' => '20f0e6fcef31a0280a21be6d2147542d' }
+                  'X_NONCE' => '20f0e6fcef31a0280a21be6d2147542d' }
       @request = Curl::Easy.new("/resource.xml?foo=bar&bar=foo") do |curl|
         curl.headers = headers
       end
@@ -194,7 +194,7 @@ describe "ApiAuth::Headers" do
         'CONTENT_MD5' => 'e59ff97941044f85df5297e1c302d260',
         'CONTENT_TYPE' => 'text/plain',
         'HTTP_DATE' => 'Mon, 23 Jan 1984 03:29:56 GMT',
-        'NONCE' => '20f0e6fcef31a0280a21be6d2147542d')
+        'X_NONCE' => '20f0e6fcef31a0280a21be6d2147542d')
       @headers = ApiAuth::Headers.new(@request)
     end
 
@@ -225,7 +225,7 @@ describe "ApiAuth::Headers" do
         'REQUEST_METHOD' => 'PUT',
         'CONTENT_MD5' => 'e59ff97941044f85df5297e1c302d260',
         'CONTENT_TYPE' => 'text/plain',
-        'NONCE' => '20f0e6fcef31a0280a21be6d2147542d'
+        'X_NONCE' => '20f0e6fcef31a0280a21be6d2147542d'
       )
       headers = ApiAuth::Headers.new(request)
       headers.canonical_string
@@ -239,7 +239,7 @@ describe "ApiAuth::Headers" do
       headers = { 'Content-MD5' => "e59ff97941044f85df5297e1c302d260",
                   'Content-Type' => "text/plain",
                   'Date' => "Mon, 23 Jan 1984 03:29:56 GMT",
-                  'NONCE' => "20f0e6fcef31a0280a21be6d2147542d" }
+                  'X_NONCE' => "20f0e6fcef31a0280a21be6d2147542d" }
       @request = Rack::Request.new(Rack::MockRequest.env_for("/resource.xml?foo=bar&bar=foo", :method => :put).merge!(headers))
       @headers = ApiAuth::Headers.new(@request)
     end
@@ -278,7 +278,7 @@ describe "ApiAuth::Headers" do
          'content-type' => 'text/plain',
          'content-md5'  => 'e59ff97941044f85df5297e1c302d260',
          'date'         => "Mon, 23 Jan 1984 03:29:56 GMT",
-         'NONCE' => "20f0e6fcef31a0280a21be6d2147542d"
+         'X_NONCE' => "20f0e6fcef31a0280a21be6d2147542d"
        })
        @headers = ApiAuth::Headers.new(@request)
      end

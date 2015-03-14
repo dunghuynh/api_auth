@@ -90,7 +90,7 @@ A typical RestClient PUT request may look like:
     headers = { 'Content-MD5' => "e59ff97941044f85df5297e1c302d260",
         'Content-Type' => "text/plain",
         'Date' => "Mon, 23 Jan 1984 03:29:56 GMT",
-        'NONCE' => SecureRandom.hex }
+        'X_NONCE' => SecureRandom.hex }
     @request = RestClient::Request.new(:url => "/resource.xml?foo=bar&bar=foo",
         :headers => headers,
         :method => :put)

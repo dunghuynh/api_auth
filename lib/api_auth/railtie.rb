@@ -100,7 +100,7 @@ module ApiAuth
             arguments.last['Content-MD5'] = tmp['Content-MD5'] if tmp['Content-MD5']
             arguments.last['DATE'] = tmp['DATE']
             arguments.last['Authorization'] = tmp['Authorization']
-            arguments.last['NONCE'] = tmp['NONCE']
+            arguments.last['X_NONCE'] = tmp['X_NONCE']
           end
 
           request_without_auth(method, path, *arguments)
