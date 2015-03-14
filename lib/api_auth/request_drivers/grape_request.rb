@@ -19,7 +19,8 @@ module ApiAuth
       end
 
       def calculated_md5
-        body = @request.raw_post
+        body = @request.body.read
+        @request.body.rewind
         md5_base64digest(body)
       end
 
@@ -52,7 +53,7 @@ module ApiAuth
       end
 
       def request_uri
-        @request.request_uri
+        @request.url
       end
 
       def set_date
