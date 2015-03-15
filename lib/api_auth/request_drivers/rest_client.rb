@@ -71,6 +71,7 @@ module ApiAuth
 
       def set_nonce
         @request.headers.merge!({ "X_NONCE" => SecureRandom.hex })
+        save_headers
       end
 
       def timestamp
