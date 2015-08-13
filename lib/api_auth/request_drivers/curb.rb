@@ -18,12 +18,23 @@ module ApiAuth
         @request
       end
 
+      def calculated_md5
+        md5_base64digest(@request.post_body)
+      end
+
       def populate_content_md5
-        nil #doesn't appear to be possible
+        if @request.post_body.present?
+          @request.headers.merge!({ "Content-MD5" => calculated_md5 })
+          @headers = fetch_headers
+        end
       end
 
       def md5_mismatch?
-        false
+        if @request.post_body.present?
+          calculated_md5 != content_md5
+        else
+          false
+        end
       end
 
       def fetch_headers
